@@ -1,0 +1,74 @@
+<?xml version="1.0"?> 
+<odoo>
+    <data>
+        <!-- <menuitem id="menu_tecnologias" name="Tecnologias" parent="" action="task.action_task_technology"/> -->
+
+        <menuitem id="menu_tecnologias" name="Tecnologias" parent="task.menu_personal_root" action="task.action_task_technology"/>
+
+        <record id="view_form_task_technology" model="ir.ui.view"> 
+            <field name="name">Task Technology Form</field> 
+            <field name="model">task.technology</field> 
+            <field name="arch" type="xml"> 
+                <form> 
+                    <!-- <header> 
+                        <button name="do_toggle_done" type="object" 
+                        string="Toggle Done" class="oe_highlight" /> 
+                        <button name="do_clear_done" type="object" 
+                        string="Clear All Done" /> 
+                    </header>  -->
+                    <sheet> 
+                        <group> 
+                            <field name="name"/> 
+                        </group> 
+                        <group>
+                            <field name="description"/>  
+                            <field name="active" readonly="1" /> 
+                        </group> 
+                    </sheet> 
+                </form>
+            </field> 
+        </record> 
+
+        <record id="view_tree_task_technology" model="ir.ui.view"> 
+            <field name="name">Task Technology Tree</field> 
+            <field name="model">task.technology</field> 
+            <field name="arch" type="xml"> 
+                <tree> 
+                    <field name="name"/>  
+                </tree> 
+            </field> 
+        </record>
+
+        <record id="view_filter_task_technology" model="ir.ui.view"> 
+            <field name="name">Task Technology Filter</field> 
+            <field name="model">task.technology</field> 
+            <field name="arch" type="xml"> 
+                <search> 
+                    <field name="name"/> 
+                </search>
+            </field> 
+        </record>
+        
+        <record id="action_task_technology" model="ir.actions.act_window">
+            <field name="name">Task Technology</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">task.technology</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+       
+
+        <record id="action_task_technology_view_tree" model="ir.actions.act_window.view">
+            <field name="sequence">1</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="task.view_tree_task_technology"/>
+            <field name="act_window_id" ref="action_task_technology"/>
+        </record>
+
+        <record id="action_task_technology_view_form" model="ir.actions.act_window.view">
+            <field name="sequence">2</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="task.view_form_task_technology"/>
+            <field name="act_window_id" ref="action_task_technology"/>
+        </record>
+    </data>
+</odoo>

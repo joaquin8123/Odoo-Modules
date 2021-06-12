@@ -1,0 +1,88 @@
+<?xml version="1.0"?> 
+<odoo>
+    <data>
+        <menuitem id="menu_service_root" name="Service" parent=""/>
+        <menuitem id="menu_service" name="Service" parent="service.menu_service_root" action="service.action_service_service"/>
+
+        <record id="view_form_service_service" model="ir.ui.view"> 
+            <field name="name">Service Form</field> 
+            <field name="model">service.service</field> 
+            <field name="arch" type="xml"> 
+                <form> 
+                    <header>
+                        <!-- <field name="state" widget="statusbar" statusbar_visible="draft,progress,done"/>  -->
+                        <button name="btn_calcular_totales" type="object" 
+                        string="Calcular Total" class="oe_highlight" />
+                    </header> 
+                    <sheet>
+                        <div>
+                            <group>
+                                <field name="name"/>  
+                                 <field name="patente"/> 
+                            </group>
+                        </div>
+                            <group>
+                                <field name="services_ids" nolabel="1">
+                                    <tree string="Lienas de Servicios" editable="bottom">
+                                        <field name="name" />
+                                        <field name="tipo"/>
+                                        <field name="precio"/>
+                                        <field name="cantidad"/>
+                                    </tree>
+                                </field>
+                                <field name="total"/>
+                            </group> 
+                        <div>
+                        </div> 
+                    </sheet> 
+                </form>
+            </field> 
+        </record> 
+
+        <record id="view_tree_service_service" model="ir.ui.view"> 
+            <field name="name">Service Tree</field> 
+            <field name="model">service.service</field> 
+            <field name="arch" type="xml"> 
+                <tree> 
+                    <field name="name"/> 
+                    <field name="total"/>  
+                    <!-- <field name="state"/>  -->
+                </tree> 
+            </field> 
+        </record>
+
+        <!-- <record id="view_filter_task_task" model="ir.ui.view"> 
+            <field name="name">Task Filter</field> 
+            <field name="model">task.task</field> 
+            <field name="arch" type="xml"> 
+                <search> 
+                    <field name="name"/> 
+                    <filter string="Not Done" domain="[('is_done','=',False)]"/> 
+                    <filter string="Done" domain="[('is_done','!=',False)]"/> 
+                </search>
+            </field> 
+        </record> -->
+       
+        
+        <record id="action_service_service" model="ir.actions.act_window">
+            <field name="name">Service</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">service.service</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    
+        <record id="action_service_service_view_tree" model="ir.actions.act_window.view">
+            <field name="sequence">1</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="service.view_tree_service_service"/>
+            <field name="act_window_id" ref="action_service_service"/>
+        </record>
+
+        <record id="action_service_service_view_form" model="ir.actions.act_window.view">
+            <field name="sequence">2</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="service.view_form_service_service"/>
+            <field name="act_window_id" ref="action_service_service"/>
+        </record>
+    </data>
+</odoo>
